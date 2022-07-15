@@ -17,6 +17,10 @@ public class Benutzer {
     
     private boolean admin;
 
+    protected Benutzer() {
+    	
+    }
+    
 	public Benutzer(String benutzername, String passwort, boolean admin) {
 		this.benutzername = benutzername;
 		this.passwort = passwort;
