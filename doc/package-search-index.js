@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ch.bbw.as.bookmerkerbackend"},{"l":"ch.bbw.as.bookmerkerbackend.benutzer"},{"l":"ch.bbw.as.bookmerkerbackend.buch"},{"l":"ch.bbw.as.bookmerkerbackend.erinnerung"},{"l":"ch.bbw.as.bookmerkerbackend.kommentar"}];updateSearchResults();

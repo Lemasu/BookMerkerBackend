@@ -11,26 +11,43 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import ch.bbw.as.bookmerkerbackend.benutzer.Benutzer;
 import ch.bbw.as.bookmerkerbackend.buch.Buch;
 
+/**
+ * von Benutzer erfasste Erinnerungen
+ * 
+ * @author Alex Schaub
+ * @version 1.0
+ */
 @Entity
 public class Erinnerung {
 	/**
-	 * Das ist die Id eines Buches. Die Id wird automatisch generiert.
+	 * Das ist die Id einer Erinnerung. Die Id wird automatisch generiert.
 	 */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
+    /**
+     * Benutzer, welcher die Erinnerung erfasst hatte
+     */
     @ManyToOne
     @JsonBackReference
     private Benutzer benutzer;
     
+    /**
+     * Erinnerung ist faellig am
+     */
     private LocalDateTime faellig_am;
     
+    /**
+     * Buecher, welche in diese Erinnerung erfasst wurden
+     */
     @ManyToMany
+    @JsonManagedReference
     private Set<Buch> buecher;
 
     protected Erinnerung() {

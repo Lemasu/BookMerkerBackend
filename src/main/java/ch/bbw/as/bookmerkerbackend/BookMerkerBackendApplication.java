@@ -3,7 +3,6 @@ package ch.bbw.as.bookmerkerbackend;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +46,9 @@ public class BookMerkerBackendApplication {
 	 * Mit diesem CommandLineRunner werden Beispieldaten in die Datenbank geschrieben.
 	 * 
 	 * @param buchRepository Das ist das Repository fuer die Buecher.
+	 * @param benutzerRepository Das ist das Repository fuer die Benutzer.
+	 * @param erinnerungRepository Das ist das Repository fuer die Erinnerungen.
+	 * @param kommentarRepository Das ist das Repository fuer die Kommentare.
 	 * @return Dieser CommandLineRunner wird zurueckgegeben, damit sie beim Aufstarten dieser Applikation laufen gelassen werden kann.
 	 */
 	@Bean

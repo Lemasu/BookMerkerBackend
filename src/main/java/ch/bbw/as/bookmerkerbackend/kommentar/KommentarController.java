@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Das ist der Controller fuer die Kommentare.
+ * 
+ * @author Alex Schaub
+ * @version 1.0
+ */
 @RestController
 @RequestMapping("/comments")
 public class KommentarController {

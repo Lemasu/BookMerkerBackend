@@ -60,15 +60,25 @@ public class Buch {
      */
     private long isbn;
     
+    /**
+     * Buch befindet sich auf den Listen von den folgenden Benutzern
+     */
     @ManyToMany(mappedBy = "buchliste")
     @JsonBackReference
     private Set<Benutzer> auf_liste_von;
     
+    /**
+     * Buch wurde von den folgenden Erinnerungen gemerkt
+     */
     @ManyToMany(mappedBy = "buecher")
     @JsonBackReference
     private Set<Erinnerung> gemerkt_von;
     
+    /**
+     * folgende Kommentare wurde zum Buch verfasst
+     */
     @OneToMany(mappedBy = "buch")
+    @JsonBackReference
     private Set<Kommentar> kommentare;
 
     protected Buch() {

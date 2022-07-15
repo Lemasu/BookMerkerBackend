@@ -9,33 +9,62 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import ch.bbw.as.bookmerkerbackend.buch.Buch;
 import ch.bbw.as.bookmerkerbackend.erinnerung.Erinnerung;
 import ch.bbw.as.bookmerkerbackend.kommentar.Kommentar;
 
+/**
+ * Benutzer der Applikation
+ * 
+ * @author Alex Schaub
+ * @version 1.0
+ */
 @Entity
 public class Benutzer {
+	/**
+	 * Id vom Benutzer
+	 */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
+	/**
+	 * Benutzername vom Benutzer
+	 */
     private String benutzername;
     
+	/**
+	 * Passwort vom Benutzer
+	 */
     private String passwort;
     
+	/**
+	 * ist Benutzer Admin?
+	 */
     private boolean admin;
     
+	/**
+	 * Buecher, welcher er seiner Liste hinzugefuegt hatte
+	 */
     @ManyToMany
     @JsonManagedReference
     private Set<Buch> buchliste;
     
+    /**
+     * Erinnerungen vom Benutzer
+     */
     @OneToMany(mappedBy = "benutzer")
     @JsonManagedReference
     private Set<Erinnerung> erinnerungen;
     
+    /**
+     * Kommentare vom Benutzer
+     */
     @OneToMany(mappedBy = "verfasser")
+    @JsonBackReference
     private Set<Kommentar> kommentare;
 
     protected Benutzer() {
