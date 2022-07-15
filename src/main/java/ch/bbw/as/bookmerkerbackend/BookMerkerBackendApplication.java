@@ -10,14 +10,34 @@ import org.springframework.context.annotation.Bean;
 import ch.bbw.as.bookmerkerbackend.buch.Buch;
 import ch.bbw.as.bookmerkerbackend.buch.BuchRepository;
 
+/**
+ * Ueber diese Klasse wird die Applikation BookMerkerBackend gestartet.
+ * 
+ * @author Alex Schaub
+ * @version 1.0
+ */
 @SpringBootApplication
 public class BookMerkerBackendApplication {
+	/**
+	 * Das ist der Logger, welcher benoetigt wird, um zu loggen
+	 */
 	Logger logger = LoggerFactory.getLogger(BookMerkerBackendApplication.class);
 
+	/**
+	 * Ueber die Main-Methode wird diese Applikation gestartet.
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(BookMerkerBackendApplication.class, args);
 	}
 	
+	/**
+	 * Mit diesem CommandLineRunner werden Beispieldaten in die Datenbank geschrieben.
+	 * 
+	 * @param buchRepository Das ist das Repository fuer die Buecher.
+	 * @return Dieser CommandLineRunner wird zurueckgegeben, damit sie beim Aufstarten dieser Applikation laufen gelassen werden kann.
+	 */
 	@Bean
 	public CommandLineRunner demo(BuchRepository buchRepository) {
 		return (args) -> {
