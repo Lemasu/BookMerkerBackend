@@ -19,4 +19,10 @@ public class BuchController {
 	public List<Buch> getAllBooks() {
 		return buchRepository.findAll();
 	}
+	
+	@GetMapping("/{id}")
+	public Buch getBuchById(@PathVariable Long id) {
+		return buchRepository.findById(id)
+				.orElseThrow(() -> new BuchNotFoundException(id));
+	}
 }
