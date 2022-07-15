@@ -4,25 +4,52 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+/**
+ * Dieses Entitaet stellt ein einzelnes Buch dar.
+ * 
+ * @author Alex Schaub
+ * @version 1.0
+ */
 @Entity
 public class Buch {
+	/**
+	 * Das ist die Id eines Buches. Die Id wird automatisch generiert.
+	 */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
+    /**
+     * Das ist die URL zum Thumbnail fuer des Buchs.
+     */
     private String url_thumbnail;
     
+    /**
+     * Das ist die URL zum Bild fuer des Buchs.
+     */
     private String url_bild;
     
+    /**
+     * Das ist der Titel dieses Buchs.
+     */
     @NotBlank(message = "Der Titel eines Buches muss erfasst werden.")
     @Size(max = 1000, message = "Der Zeichenanzahl darf nicht groesser als 1000 sein.")
     private String buchtitel;
     
+    /**
+     * Das ist eine kurze Beschreibung fuer dieses Buch.
+     */
     @Size(max = 1000, message = "Der Zeichenanzahl darf nicht groesser als 1000 sein.")
     private String beschreibung;
     
+    /**
+     * Das ist die Seitenanzahl dieses Buchs.
+     */
     private int seitenzahl;
     
+    /**
+     * Das ist die ISBN-Nummer dieses Buchs.
+     */
     private long isbn;
 
     protected Buch() {

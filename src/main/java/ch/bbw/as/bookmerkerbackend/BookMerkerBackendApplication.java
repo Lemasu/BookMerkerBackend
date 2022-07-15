@@ -34,7 +34,6 @@ public class BookMerkerBackendApplication {
 			buchRepository.save(buch5);
 
 			logger.info("Beispieldaten geladen");
-
 		};
 	}
 
