@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import ch.bbw.as.bookmerkerbackend.buch.Buch;
 import ch.bbw.as.bookmerkerbackend.erinnerung.Erinnerung;
+import ch.bbw.as.bookmerkerbackend.kommentar.Kommentar;
 
 @Entity
 public class Benutzer {
@@ -33,20 +34,25 @@ public class Benutzer {
     @OneToMany(mappedBy = "benutzer")
     @JsonManagedReference
     private Set<Erinnerung> erinnerungen;
+    
+    @OneToMany(mappedBy = "verfasser")
+    private Set<Kommentar> kommentare;
 
     protected Benutzer() {
     	
     }
-
+	
 	public Benutzer(String benutzername, String passwort, boolean admin, Set<Buch> buchliste,
-			Set<Erinnerung> erinnerungen) {
+			Set<Erinnerung> erinnerungen, Set<Kommentar> kommentare) {
+		super();
 		this.benutzername = benutzername;
 		this.passwort = passwort;
 		this.admin = admin;
 		this.buchliste = buchliste;
 		this.erinnerungen = erinnerungen;
+		this.kommentare = kommentare;
 	}
-	
+
 	public long getId() {
 		return id;
 	}
@@ -93,5 +99,13 @@ public class Benutzer {
 
 	public void setErinnerungen(Set<Erinnerung> erinnerungen) {
 		this.erinnerungen = erinnerungen;
+	}
+
+	public Set<Kommentar> getKommentare() {
+		return kommentare;
+	}
+
+	public void setKommentare(Set<Kommentar> kommentare) {
+		this.kommentare = kommentare;
 	}
 }

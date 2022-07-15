@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import ch.bbw.as.bookmerkerbackend.benutzer.Benutzer;
 import ch.bbw.as.bookmerkerbackend.erinnerung.Erinnerung;
+import ch.bbw.as.bookmerkerbackend.kommentar.Kommentar;
 
 /**
  * Dieses Entitaet stellt ein einzelnes Buch dar.
@@ -66,15 +67,19 @@ public class Buch {
     @ManyToMany(mappedBy = "buecher")
     @JsonBackReference
     private Set<Erinnerung> gemerkt_von;
+    
+    @OneToMany(mappedBy = "buch")
+    private Set<Kommentar> kommentare;
 
     protected Buch() {
     	
     }
-	
+    
 	public Buch(String url_thumbnail, String url_bild,
 			@NotBlank(message = "Der Titel eines Buches muss erfasst werden.") @Size(max = 1000, message = "Der Zeichenanzahl darf nicht groesser als 1000 sein.") String buchtitel,
 			@Size(max = 1000, message = "Der Zeichenanzahl darf nicht groesser als 1000 sein.") String beschreibung,
-			int seitenzahl, long isbn, Set<Benutzer> auf_liste_von, Set<Erinnerung> gemerkt_von) {
+			int seitenzahl, long isbn, Set<Benutzer> auf_liste_von, Set<Erinnerung> gemerkt_von,
+			Set<Kommentar> kommentare) {
 		super();
 		this.url_thumbnail = url_thumbnail;
 		this.url_bild = url_bild;
@@ -84,6 +89,7 @@ public class Buch {
 		this.isbn = isbn;
 		this.auf_liste_von = auf_liste_von;
 		this.gemerkt_von = gemerkt_von;
+		this.kommentare = kommentare;
 	}
 
 	public long getId() {
@@ -156,5 +162,13 @@ public class Buch {
 
 	public void setGemerkt_von(Set<Erinnerung> gemerkt_von) {
 		this.gemerkt_von = gemerkt_von;
+	}
+
+	public Set<Kommentar> getKommentare() {
+		return kommentare;
+	}
+
+	public void setKommentare(Set<Kommentar> kommentare) {
+		this.kommentare = kommentare;
 	}
 }
