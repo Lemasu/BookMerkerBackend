@@ -3,6 +3,7 @@ package ch.bbw.as.bookmerkerbackend.buch;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,6 +27,7 @@ public class BuchController {
 	}
 
 	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
 	public Buch addBook(@RequestBody Buch newBuch) {
 		return buchRepository.save(newBuch);
 	}
