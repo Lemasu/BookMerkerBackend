@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import ch.bbw.as.bookmerkerbackend.benutzer.Benutzer;
+import ch.bbw.as.bookmerkerbackend.erinnerung.Erinnerung;
 
 /**
  * Dieses Entitaet stellt ein einzelnes Buch dar.
@@ -61,15 +62,19 @@ public class Buch {
     @ManyToMany(mappedBy = "buchliste")
     @JsonBackReference
     private Set<Benutzer> auf_liste_von;
+    
+    @ManyToMany(mappedBy = "buecher")
+    @JsonBackReference
+    private Set<Erinnerung> gemerkt_von;
 
     protected Buch() {
     	
     }
-    
+	
 	public Buch(String url_thumbnail, String url_bild,
 			@NotBlank(message = "Der Titel eines Buches muss erfasst werden.") @Size(max = 1000, message = "Der Zeichenanzahl darf nicht groesser als 1000 sein.") String buchtitel,
 			@Size(max = 1000, message = "Der Zeichenanzahl darf nicht groesser als 1000 sein.") String beschreibung,
-			int seitenzahl, long isbn, Set<Benutzer> auf_liste_von) {
+			int seitenzahl, long isbn, Set<Benutzer> auf_liste_von, Set<Erinnerung> gemerkt_von) {
 		super();
 		this.url_thumbnail = url_thumbnail;
 		this.url_bild = url_bild;
@@ -78,8 +83,9 @@ public class Buch {
 		this.seitenzahl = seitenzahl;
 		this.isbn = isbn;
 		this.auf_liste_von = auf_liste_von;
+		this.gemerkt_von = gemerkt_von;
 	}
-	
+
 	public long getId() {
 		return id;
 	}
@@ -142,5 +148,13 @@ public class Buch {
 
 	public void setAuf_liste_von(Set<Benutzer> auf_liste_von) {
 		this.auf_liste_von = auf_liste_von;
+	}
+
+	public Set<Erinnerung> getGemerkt_von() {
+		return gemerkt_von;
+	}
+
+	public void setGemerkt_von(Set<Erinnerung> gemerkt_von) {
+		this.gemerkt_von = gemerkt_von;
 	}
 }

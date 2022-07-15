@@ -50,11 +50,11 @@ public class BookMerkerBackendApplication {
 	@Bean
 	public CommandLineRunner demo(BuchRepository buchRepository, BenutzerRepository benutzerRepository, ErinnerungRepository erinnerungRepository) {
 		return (args) -> {
-			Buch buch1 = new Buch("https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-08.jpeg", "https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-00.jpeg", "Buch 1", "Beschreibung von Buch 1", 100, 9783966450300L, new HashSet<>());
-			Buch buch2 = new Buch("https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-08.jpeg", "https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-00.jpeg", "Buch 2", "Beschreibung von Buch 2", 200, 9783966450301L, new HashSet<>());
-			Buch buch3 = new Buch("https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-08.jpeg", "https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-00.jpeg", "Buch 3", "Beschreibung von Buch 3", 300, 9783966450302L, new HashSet<>());
-			Buch buch4 = new Buch("https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-08.jpeg", "https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-00.jpeg", "Buch 4", "Beschreibung von Buch 4", 400, 9783966450303L, new HashSet<>());
-			Buch buch5 = new Buch("https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-08.jpeg", "https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-00.jpeg", "Buch 5", "Beschreibung von Buch 5", 500, 9783966450304L, new HashSet<>());
+			Buch buch1 = new Buch("https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-08.jpeg", "https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-00.jpeg", "Buch 1", "Beschreibung von Buch 1", 100, 9783966450300L, new HashSet<>(), new HashSet<>());
+			Buch buch2 = new Buch("https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-08.jpeg", "https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-00.jpeg", "Buch 2", "Beschreibung von Buch 2", 200, 9783966450301L, new HashSet<>(), new HashSet<>());
+			Buch buch3 = new Buch("https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-08.jpeg", "https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-00.jpeg", "Buch 3", "Beschreibung von Buch 3", 300, 9783966450302L, new HashSet<>(), new HashSet<>());
+			Buch buch4 = new Buch("https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-08.jpeg", "https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-00.jpeg", "Buch 4", "Beschreibung von Buch 4", 400, 9783966450303L, new HashSet<>(), new HashSet<>());
+			Buch buch5 = new Buch("https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-08.jpeg", "https://assets.thalia.media/img/artikel/1b6d07a88e703c10653d70dfa99cdafba22e2b89-00-00.jpeg", "Buch 5", "Beschreibung von Buch 5", 500, 9783966450304L, new HashSet<>(), new HashSet<>());
 
 			buchRepository.save(buch1);
 			buchRepository.save(buch2);
@@ -65,7 +65,7 @@ public class BookMerkerBackendApplication {
 			Benutzer benutzer = new Benutzer("abc", "abc", false, new HashSet<>(Arrays.asList(buch1)), new HashSet<>());
 			benutzerRepository.save(benutzer);
 			
-			Erinnerung erinnerung = new Erinnerung(benutzer, LocalDateTime.now());
+			Erinnerung erinnerung = new Erinnerung(benutzer, LocalDateTime.now(), new HashSet<>(Arrays.asList(buch1, buch2, buch3, buch4, buch5)));
 			erinnerungRepository.save(erinnerung);
 
 			logger.info("Beispieldaten geladen");
