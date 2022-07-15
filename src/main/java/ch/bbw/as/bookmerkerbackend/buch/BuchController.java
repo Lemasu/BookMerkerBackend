@@ -47,4 +47,9 @@ public class BuchController {
 			return buchRepository.save(newBuch);
 		});
 	}
+	
+	@DeleteMapping("/{id}")
+	public void deleteBook(@PathVariable Long id) {
+		buchRepository.deleteById(id);
+	}
 }
