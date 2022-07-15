@@ -19,15 +19,30 @@ public class BuchController {
 	public List<Buch> getAllBooks() {
 		return buchRepository.findAll();
 	}
-	
+
 	@GetMapping("/{id}")
 	public Buch getBuchById(@PathVariable Long id) {
-		return buchRepository.findById(id)
-				.orElseThrow(() -> new BuchNotFoundException(id));
+		return buchRepository.findById(id).orElseThrow(() -> new BuchNotFoundException(id));
 	}
-	
+
 	@PostMapping
 	public Buch addBook(@RequestBody Buch newBuch) {
 		return buchRepository.save(newBuch);
+	}
+
+	@PutMapping("/{id}")
+	public Buch updateBook(@RequestBody Buch newBuch, @PathVariable Long id) {
+		return buchRepository.findById(id).map(buch -> {
+			buch.setUrl_thumbnail(newBuch.getUrl_thumbnail());
+			buch.setUrl_bild(newBuch.getUrl_bild());
+			buch.setBuchtitel(newBuch.getBuchtitel());
+			buch.setBeschreibung(newBuch.getBeschreibung());
+			buch.setSeitenzahl(newBuch.getSeitenzahl());
+			buch.setIsbn(newBuch.getIsbn());
+			return buchRepository.save(buch);
+		}).orElseGet(() -> {
+			newBuch.setId(id);
+			return buchRepository.save(newBuch);
+		});
 	}
 }
