@@ -1,7 +1,7 @@
 package ch.bbw.as.bookmerkerbackend.buch;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -14,11 +14,11 @@ public class Buch {
     
     private String url_bild;
     
-    @NotEmpty
-    @Size(max = 1000)
+    @NotBlank(message = "Der Titel eines Buches muss erfasst werden.")
+    @Size(max = 1000, message = "Der Zeichenanzahl darf nicht groesser als 1000 sein.")
     private String buchtitel;
     
-    @Size(max = 1000)
+    @Size(max = 1000, message = "Der Zeichenanzahl darf nicht groesser als 1000 sein.")
     private String beschreibung;
     
     private int seitenzahl;
@@ -28,9 +28,10 @@ public class Buch {
     protected Buch() {
     	
     }
-
-	public Buch(String url_thumbnail, String url_bild, @Size(max = 1000) String buchtitel,
+    
+	public Buch(String url_thumbnail, String url_bild, @NotBlank @Size(max = 1000) String buchtitel,
 			@Size(max = 1000) String beschreibung, int seitenzahl, long isbn) {
+		super();
 		this.url_thumbnail = url_thumbnail;
 		this.url_bild = url_bild;
 		this.buchtitel = buchtitel;
@@ -38,7 +39,7 @@ public class Buch {
 		this.seitenzahl = seitenzahl;
 		this.isbn = isbn;
 	}
-
+	
 	public long getId() {
 		return id;
 	}
