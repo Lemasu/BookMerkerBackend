@@ -1,8 +1,14 @@
 package ch.bbw.as.bookmerkerbackend.buch;
 
+import java.util.Set;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import ch.bbw.as.bookmerkerbackend.benutzer.Benutzer;
 
 /**
  * Dieses Entitaet stellt ein einzelnes Buch dar.
@@ -51,13 +57,19 @@ public class Buch {
      * Das ist die ISBN-Nummer dieses Buchs.
      */
     private long isbn;
+    
+    @ManyToMany(mappedBy = "buchliste")
+    @JsonBackReference
+    private Set<Benutzer> auf_liste_von;
 
     protected Buch() {
     	
     }
     
-	public Buch(String url_thumbnail, String url_bild, @NotBlank @Size(max = 1000) String buchtitel,
-			@Size(max = 1000) String beschreibung, int seitenzahl, long isbn) {
+	public Buch(String url_thumbnail, String url_bild,
+			@NotBlank(message = "Der Titel eines Buches muss erfasst werden.") @Size(max = 1000, message = "Der Zeichenanzahl darf nicht groesser als 1000 sein.") String buchtitel,
+			@Size(max = 1000, message = "Der Zeichenanzahl darf nicht groesser als 1000 sein.") String beschreibung,
+			int seitenzahl, long isbn, Set<Benutzer> auf_liste_von) {
 		super();
 		this.url_thumbnail = url_thumbnail;
 		this.url_bild = url_bild;
@@ -65,6 +77,7 @@ public class Buch {
 		this.beschreibung = beschreibung;
 		this.seitenzahl = seitenzahl;
 		this.isbn = isbn;
+		this.auf_liste_von = auf_liste_von;
 	}
 	
 	public long getId() {
@@ -121,5 +134,13 @@ public class Buch {
 
 	public void setIsbn(long isbn) {
 		this.isbn = isbn;
+	}
+
+	public Set<Benutzer> getAuf_liste_von() {
+		return auf_liste_von;
+	}
+
+	public void setAuf_liste_von(Set<Benutzer> auf_liste_von) {
+		this.auf_liste_von = auf_liste_von;
 	}
 }
