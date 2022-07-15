@@ -1,6 +1,7 @@
 package ch.bbw.as.bookmerkerbackend.buch;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -13,6 +14,7 @@ public class Buch {
     
     private String url_bild;
     
+    @NotEmpty
     @Size(max = 1000)
     private String buchtitel;
     
