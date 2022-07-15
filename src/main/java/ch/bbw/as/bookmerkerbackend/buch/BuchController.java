@@ -25,4 +25,9 @@ public class BuchController {
 		return buchRepository.findById(id)
 				.orElseThrow(() -> new BuchNotFoundException(id));
 	}
+	
+	@PostMapping
+	public Buch addBook(@RequestBody Buch newBuch) {
+		return buchRepository.save(newBuch);
+	}
 }
